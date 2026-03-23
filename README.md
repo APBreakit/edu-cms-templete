@@ -47,7 +47,12 @@ Zmiany w pliku `site.json` automatycznie zaktualizują wygląd i metadane aplika
    ```bash
    cp .env.example .env.local
    ```
-   Wymagane zmienne to m.in.: `DATABASE_URL`, `JWT_SECRET`, `BLOB_READ_WRITE_TOKEN`.
+   Wymagane zmienne to m.in.: `DATABASE_URL`, `JWT_SECRET`, `NEXTAUTH_SECRET`, `BLOB_READ_WRITE_TOKEN`.
+
+   **Ważne:** `NEXTAUTH_SECRET` musi mieć minimum 32 znaki. Wygeneruj bezpieczny sekret:
+   ```bash
+   openssl rand -base64 32
+   ```
 
 3. Zainicjalizuj bazę danych (struktura tabel):
    ```bash

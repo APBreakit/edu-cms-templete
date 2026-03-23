@@ -8,6 +8,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
+    "check-env": "node scripts/check-env.mjs",
+    "prebuild": "node scripts/check-env.mjs",
     "test:admin-crud": "node scripts/admin_crud_tests.mjs"
   },
   "dependencies": {
