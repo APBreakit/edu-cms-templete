@@ -1,0 +1,103 @@
+"use server";
+import pkg from "../../lib/db/index.js";
+const { sql } = pkg;
+
+const actions = { getPublicPosts, getPublicGalleryImages, getPublicGalleryBySlug };
+export default actions;
+
+// TypeScript interfaces for gallery data
+/**
+ * @typedef {Object} Gallery
+ * @property {string} id - Unique identifier for the gallery.
+ * @property {string} title - Title of the gallery.
+ * @property {string} description - Description of the gallery.
+ * @property {string} slug - URL-friendly identifier for the gallery.
+ * @property {string} cover_image_url - URL of the gallery's cover image.
+ * @property {string} status - Publication status of the gallery.
+ * @property {Array<Image>} images - Array of images in the gallery.
+ */
+
+/**
+ * @typedef {Object} Image
+ * @property {string} image_url - URL of the image.
+ * @property {string} title - Title or caption of the image.
+ * @property {number} sort_order - Order of the image in the gallery.
+ */
+
+export async function getPublicPosts(type, limit) {
+    try {
+        if (type && limit) {
+            return await sql `
+        SELECT * FROM posts 
+        WHERE status = 'published' AND type = ${type}
+        ORDER BY created_at DESC 
+        LIMIT ${limit}
+      `;
+        }
+        else if (type) {
+            return await sql `
+        SELECT * FROM posts 
+        WHERE status = 'published' AND type = ${type}
+        ORDER BY created_at DESC
+      `;
+        }
+        else if (limit) {
+            return await sql `
+        SELECT * FROM posts 
+        WHERE status = 'published'
+        ORDER BY created_at DESC 
+        LIMIT ${limit}
+      `;
+        }
+        return await sql `
+      SELECT * FROM posts 
+      WHERE status = 'published'
+      ORDER BY created_at DESC
+    `;
+    }
+    catch (error) {
+        console.error("Error fetching posts:", error);
+        return [];
+    }
+}
+
+export async function getPublicGalleryImages(category) {
+    try {
+        if (category && category !== "wszystkie") {
+            return await sql `
+        SELECT * FROM media 
+        WHERE file_type = 'image' AND subcategory = ${category}
+        ORDER BY created_at DESC
+      `;
+        }
+        return await sql `
+      SELECT * FROM media 
+      WHERE file_type = 'image'
+      ORDER BY created_at DESC
+    `;
+    }
+    catch (error) {
+        console.error("Error fetching gallery images:", error);
+        return [];
+    }
+}
+
+export async function getPublicGalleryBySlug(slug) {
+    try {
+        const gallery = await sql `
+        SELECT id, title, description, slug, cover_image_url, status FROM galleries 
+        WHERE slug = ${slug} AND status = 'published'
+      `;
+
+        const images = await sql `
+        SELECT id, image_url, title, sort_order FROM gallery_images 
+        WHERE gallery_id = (SELECT id FROM galleries WHERE slug = ${slug})
+        ORDER BY sort_order ASC, created_at ASC
+      `;
+
+        return { ...gallery[0], images };
+    } catch (error) {
+        console.error("Error fetching gallery by slug:", error);
+        return null;
+    }
+}

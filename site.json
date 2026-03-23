@@ -1,0 +1,29 @@
+{
+  "siteName": "EduCMS Szablon",
+  "shortName": "EduCMS",
+  "description": "Uniwersalny system CMS dla placówek edukacyjnych (przedszkola, szkoły podstawowe, średnie).",
+  "contact": {
+    "phone": "123 456 789",
+    "email": "kontakt@educms-szablon.pl",
+    "directorEmail": "dyrektor@educms-szablon.pl",
+    "accountingEmail": "ksiegowosc@educms-szablon.pl",
+    "address": "ul. Edukacyjna 1, 00-000 Miasto",
+    "mapUrl": "https://maps.app.goo.gl/"
+  },
+  "social": {
+    "facebook": "https://facebook.com"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#2f67ab",
+      "secondary": "#6fc0e8",
+      "accent": "#f2c91f",
+      "text": "#443b32",
+      "background": "#fcfaf8"
+    }
+  },
+  "logos": {
+    "main": "/logo.jpg",
+    "footer": "/logo.jpg"
+  }
+}
