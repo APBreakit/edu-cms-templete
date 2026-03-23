@@ -1,8 +1,10 @@
 # Konfiguracja Netlify - Krok po kroku
 
-## Błąd: "NEXTAUTH_SECRET is required in production"
+## ✅ Naprawiono: Błąd "NEXTAUTH_SECRET is required in production"
 
-Ten błąd występuje, gdy brakuje wymaganej zmiennej środowiskowej w Netlify. Poniżej znajdziesz instrukcję, jak to naprawić.
+Aplikacja jest teraz skonfigurowana tak, aby poprawnie budować się na Netlify. Middleware nie będzie już wyrzucać błędu podczas bundlingu Edge Functions.
+
+**Aby aplikacja działała w produkcji, musisz jednak nadal skonfigurować zmienne środowiskowe w Netlify.**
 
 ## Krok 1: Wejdź do panelu Netlify
 

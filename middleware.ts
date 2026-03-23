@@ -2,15 +2,16 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { jwtVerify } from "jose"
 
-const JWT_SECRET = (() => {
+function getJWTSecret() {
   const secret = process.env.NEXTAUTH_SECRET
   if (!secret && process.env.NODE_ENV === "production") {
     throw new Error("NEXTAUTH_SECRET is required in production")
   }
   return new TextEncoder().encode(secret || "fallback-secret-for-dev-only-change-in-production")
-})()
+}
 
 export async function middleware(req: NextRequest) {
+  const JWT_SECRET = getJWTSecret()
   const token = req.cookies.get("session")?.value
   const isAuth = !!token
 
