@@ -1,21 +1,29 @@
 import type { Metadata } from "next"
-import ClientPage from "./client-page"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import SchoolHomePage from "./school-home"
 
 export const metadata: Metadata = {
-  title: "Strona Główna - Placówka Edukacyjna Mieściea Nazaret",
+  title: "Katolicka Szkoła Podstawowa im. Świętej Rodziny w Gdyni",
   description:
-    "Przedszkole parafialne w Mieście z 34-letnim doświadczeniem. Wykwalifikowana kadra pedagogiczna, rodzinna atmosfera, edukacja katolicka. Zapisz dziecko już dziś!",
+    "Katolicka Szkoła Podstawowa prowadzona przez Zgromadzenie Sióstr Świętej Rodziny z Nazaretu w Gdyni. Kształcenie w duchu wartości chrześcijańskich.",
   alternates: {
-    canonical: "https://educms-szablon.pl",
+    canonical: "https://kspgdynia.pl",
   },
   openGraph: {
-    title: "EduCMS - Placówka Edukacyjna",
-    description: "34 lata doświadczenia w wychowaniu dzieci w duchu wartości chrześcijańskich",
-    url: "https://educms-szablon.pl",
+    title: "Katolicka Szkoła Podstawowa im. Świętej Rodziny w Gdyni",
+    description: "Kształcenie w duchu wartości chrześcijańskich",
+    url: "https://kspgdynia.pl",
     type: "website",
   },
 }
 
 export default function Page() {
-  return <ClientPage />
+  return (
+    <>
+      <Navigation />
+      <SchoolHomePage />
+      <Footer />
+    </>
+  )
 }

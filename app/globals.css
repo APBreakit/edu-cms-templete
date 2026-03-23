@@ -4,40 +4,34 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated to use kindergarten brand colors as semantic tokens */
-  --kg-brown: #443b32;
-  --kg-blue: #2f67ab;
-  --kg-light-blue: #6fc0e8;
-  --kg-yellow: #f2c91f;
-  --kg-white: #fcfaf8;
+  /* School brand colors */
+  --school-blue: #2563eb;
+  --school-light-blue: #60a5fa;
+  --school-amber: #f59e0b;
+  --school-slate: #1e293b;
+  --school-white: #ffffff;
 
-  /* Semantic color tokens mapped to kindergarten brand */
-  --background: oklch(0.99 0.005 85);
-  /* Light warm background */
-  --foreground: oklch(0.27 0.018 55);
-  /* Dark brown text */
-  --card: oklch(1 0 0);
-  /* Pure white for cards */
-  --card-foreground: oklch(0.27 0.018 55);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.27 0.018 55);
-  --primary: oklch(0.48 0.11 245);
-  /* Kindergarten blue */
+  /* Semantic color tokens with glassmorphism support */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.25 0.015 255);
+  --card: oklch(0.98 0.002 255 / 0.7);
+  --card-foreground: oklch(0.25 0.015 255);
+  --popover: oklch(0.99 0.002 255 / 0.95);
+  --popover-foreground: oklch(0.25 0.015 255);
+  --primary: oklch(0.55 0.22 260);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.71 0.12 215);
-  /* Light blue */
-  --secondary-foreground: oklch(0.27 0.018 55);
-  --muted: oklch(0.96 0.01 85);
-  --muted-foreground: oklch(0.5 0.02 55);
-  --accent: oklch(0.8 0.15 95);
-  /* Yellow accent */
-  --accent-foreground: oklch(0.27 0.018 55);
+  --secondary: oklch(0.68 0.18 260);
+  --secondary-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.95 0.005 255);
+  --muted-foreground: oklch(0.5 0.01 255);
+  --accent: oklch(0.75 0.15 70);
+  --accent-foreground: oklch(0.25 0.015 255);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.01 85);
-  --input: oklch(0.92 0.01 85);
-  --ring: oklch(0.48 0.11 245);
-  --radius: 1rem;
+  --border: oklch(0.88 0.005 255 / 0.3);
+  --input: oklch(0.92 0.005 255 / 0.5);
+  --ring: oklch(0.55 0.22 260);
+  --radius: 0.75rem;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -190,21 +184,52 @@
     filter: grayscale(100%);
   }
 
-  /* Added gradient utilities for kindergarten brand */
+  /* Glassmorphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-blue {
+    background: rgba(37, 99, 235, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+  }
+
+  /* Angular rounded corners */
+  .angular-rounded {
+    border-radius: 0.75rem;
+  }
+
+  .angular-rounded-lg {
+    border-radius: 1rem;
+  }
+
+  /* School gradient utilities */
   .gradient-1 {
-    background: linear-gradient(135deg, #2f67ab, #6fc0e8);
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
   }
 
   .gradient-2 {
-    background: linear-gradient(135deg, #443b32, #f2c91f);
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
   }
 
   .gradient-3 {
-    background: linear-gradient(135deg, #fcfaf8, #6fc0e8);
+    background: linear-gradient(135deg, #dbeafe, #93c5fd);
   }
 
   .gradient-4 {
-    background: linear-gradient(135deg, #2f67ab, #f2c91f);
+    background: linear-gradient(135deg, #2563eb, #f59e0b);
   }
 
   /* Added scrollbar-hide utility for horizontal scroll containers */

@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Newspaper, Users, Camera, Mail, ChevronDown, GraduationCap } from "lucide-react"
+import { Chrome as Home, Newspaper, Users, Camera, Mail, ChevronDown, GraduationCap, BookOpen, FileText, Calendar, Globe } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -13,75 +13,105 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
-const groups = [
-  { name: "Grupa Czerwona", slug: "czerwona", color: "#ef4444" },
-  { name: "Grupa Lawendowa", slug: "lawendowa", color: "#a78bfa" },
-  { name: "Grupa Niebieska", slug: "niebieska", color: "#3b82f6" },
-  { name: "Grupa Pastelowa", slug: "pastelowa", color: "#fbbf24" },
-  { name: "Grupa Pomarańczowa", slug: "pomaranczowa", color: "#f97316" },
-  { name: "Grupa Turkusowa", slug: "turkusowa", color: "#06b6d4" },
-  { name: "Grupa Waniliowa", slug: "waniliowa", color: "#fef3c7" },
-  { name: "Grupa Zielona", slug: "zielona", color: "#22c55e" },
-]
+const menuStructure = {
+  school: [
+    { name: "Dyrektor", slug: "/o-nas#dyrektor" },
+    { name: "Historia Szkoły", slug: "/o-nas#historia" },
+    { name: "Patron", slug: "/o-nas#patron" },
+    { name: "Nauczyciele", slug: "/o-nas#nauczyciele" },
+    { name: "Rada Rodziców", slug: "/rada-rodzicow" },
+    { name: "Rekrutacja", slug: "/rekrutacja" },
+    { name: "Samorząd uczniowski", slug: "/o-nas#samorzad" },
+    { name: "Siostry Nazaretanki", slug: "/o-nas#siostry" },
+  ],
+  student: [
+    { name: "Biblioteka", slug: "/o-nas#biblioteka" },
+    { name: "Dokumenty szkolne", slug: "/bip" },
+    { name: "Konkursy szkolne", slug: "/aktualnosci" },
+    { name: "Świetlica", slug: "/o-nas#swietlica" },
+    { name: "Pedagog i psycholog", slug: "/o-nas#pedagog" },
+    { name: "Wolontariat", slug: "/o-nas#wolontariat" },
+    { name: "Zajęcia pozalekcyjne", slug: "/o-nas#zajecia" },
+  ],
+  calendar: [
+    { name: "Kalendarium", slug: "/o-nas#kalendarz" },
+    { name: "Msze Święte", slug: "/o-nas#msze" },
+    { name: "Zebrania i konsultacje", slug: "/o-nas#zebrania" },
+  ],
+}
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [groupsMenuOpen, setGroupsMenuOpen] = useState(false)
+  const [schoolMenuOpen, setSchoolMenuOpen] = useState(false)
+  const [studentMenuOpen, setStudentMenuOpen] = useState(false)
+  const [yearMenuOpen, setYearMenuOpen] = useState(false)
+  const [language, setLanguage] = useState<"pl" | "en">("pl")
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/90 backdrop-blur-xl border-b border-primary/10 shadow-sm">
+    <nav className="sticky top-0 z-50 glass-strong shadow-lg angular-rounded-lg m-2">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+            <div className="w-14 h-14 flex items-center justify-center overflow-hidden">
               <Image
                 src={siteConfig.logos.main}
                 alt={`${siteConfig.siteName} Logo`}
-                width={48}
-                height={48}
+                width={56}
+                height={56}
                 className="object-contain"
               />
             </div>
-            <div>
-              <div className="font-serif text-xl text-foreground font-bold">{siteConfig.siteName}</div>
-              <div className="text-xs text-primary">{siteConfig.shortName}</div>
+            <div className="hidden md:block">
+              <div className="font-bold text-lg text-foreground leading-tight max-w-sm">
+                {siteConfig.shortName}
+              </div>
+              <div className="text-xs text-primary font-semibold">Gdynia</div>
             </div>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-3.5">
-            <Link
-              href="/o-nas"
-              className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold"
-            >
-              <Home className="w-4 h-4" />O nas
-            </Link>
-            <Link
-              href="/aktualnosci"
-              className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold"
-            >
-              <Newspaper className="w-4 h-4" />
-              Aktualności
+          <div className="hidden lg:flex items-center gap-1">
+            <Link href="/" className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold">
+              Start
             </Link>
 
             <NavigationMenu viewport={false}>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold bg-transparent">
-                    <Users className="w-4 h-4" />
-                    Grupy
+                  <NavigationMenuTrigger className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold bg-transparent">
+                    Szkoła
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[400px] gap-3 p-4">
-                      {groups.map((group) => (
+                    <div className="w-[280px] p-3 glass-strong angular-rounded">
+                      {menuStructure.school.map((item) => (
                         <Link
-                          key={group.slug}
-                          href={`/grupy/${group.slug}`}
-                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors group"
+                          key={item.slug}
+                          href={item.slug}
+                          className="block px-4 py-2.5 text-sm hover:bg-primary/10 angular-rounded transition-colors"
                         >
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: group.color }} />
-                          <span className="text-foreground group-hover:text-primary font-medium">{group.name}</span>
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            <NavigationMenu viewport={false}>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold bg-transparent">
+                    Dla ucznia
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[280px] p-3 glass-strong angular-rounded">
+                      {menuStructure.student.map((item) => (
+                        <Link
+                          key={item.slug}
+                          href={item.slug}
+                          className="block px-4 py-2.5 text-sm hover:bg-primary/10 angular-rounded transition-colors"
+                        >
+                          {item.name}
                         </Link>
                       ))}
                     </div>
@@ -91,125 +121,163 @@ export function Navigation() {
             </NavigationMenu>
 
             <Link
-              href="/galeria"
-              className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold"
+              href="/aktualnosci"
+              className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold"
             >
-              <Camera className="w-4 h-4" />
+              Aktualności
+            </Link>
+
+            <Link href="/galeria" className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold">
               Galeria
             </Link>
-            <Link
-              href="/rekrutacja"
-              className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold"
-            >
-              <GraduationCap className="w-4 h-4" />
-              Rekrutacja
-            </Link>
+
+            <NavigationMenu viewport={false}>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold bg-transparent">
+                    Rok szkolny
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[280px] p-3 glass-strong angular-rounded">
+                      {menuStructure.calendar.map((item) => (
+                        <Link
+                          key={item.slug}
+                          href={item.slug}
+                          className="block px-4 py-2.5 text-sm hover:bg-primary/10 angular-rounded transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
             <Link
               href="/kontakt"
-              className="flex items-center gap-2 text-foreground hover:text-primary transition-colors font-semibold"
+              className="px-4 py-2 text-foreground hover:text-primary transition-colors font-semibold"
             >
-              <Mail className="w-4 h-4" />
               Kontakt
             </Link>
+
+            <button
+              onClick={() => setLanguage(language === "pl" ? "en" : "pl")}
+              className="ml-2 px-3 py-2 text-sm font-semibold text-foreground hover:text-primary transition-colors flex items-center gap-1.5"
+              aria-label="Zmień język"
+            >
+              <Globe className="w-4 h-4" />
+              {language.toUpperCase()}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 hover:opacity-80 transition-opacity"
+            className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Menu"
           >
             <span
-              className={`w-6 h-0.5 bg-primary rounded-full transition-all duration-300 ${
+              className={`w-6 h-0.5 bg-primary rounded-full transition-all ${
                 mobileMenuOpen ? "rotate-45 translate-y-2" : ""
               }`}
             />
+            <span className={`w-6 h-0.5 bg-primary rounded-full transition-all ${mobileMenuOpen ? "opacity-0" : ""}`} />
             <span
-              className={`w-6 h-0.5 bg-primary rounded-full transition-all duration-300 ${
-                mobileMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-primary rounded-full transition-all duration-300 ${
+              className={`w-6 h-0.5 bg-primary rounded-full transition-all ${
                 mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             />
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border shadow-xl animate-slide-in-down">
-            <div className="container mx-auto px-4 py-6 space-y-4">
-              <Link
-                href="/o-nas"
-                className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Home className="w-5 h-5" />O nas
-              </Link>
-              <Link
-                href="/aktualnosci"
-                className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Newspaper className="w-5 h-5" />
-                Aktualności
-              </Link>
+          <div className="lg:hidden mt-4 glass-strong angular-rounded p-4 space-y-2">
+            <Link href="/" className="block py-2 font-semibold" onClick={() => setMobileMenuOpen(false)}>
+              Start
+            </Link>
 
-              <div>
-                <button
-                  onClick={() => setGroupsMenuOpen(!groupsMenuOpen)}
-                  className="flex items-center justify-between w-full gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                >
-                  <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5" />
-                    Grupy
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${groupsMenuOpen ? "rotate-180" : ""}`} />
-                </button>
-                {groupsMenuOpen && (
-                  <div className="ml-8 mt-2 space-y-2">
-                    {groups.map((group) => (
-                      <Link
-                        key={group.slug}
-                        href={`/grupy/${group.slug}`}
-                        className="flex items-center gap-3 py-2 text-foreground hover:text-primary transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: group.color }} />
-                        <span className="text-sm">{group.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <Link
-                href="/galeria"
-                className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                onClick={() => setMobileMenuOpen(false)}
+            <div>
+              <button
+                onClick={() => setSchoolMenuOpen(!schoolMenuOpen)}
+                className="flex items-center justify-between w-full py-2 font-semibold"
               >
-                <Camera className="w-5 h-5" />
-                Galeria
-              </Link>
-              <Link
-                href="/rekrutacja"
-                className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <GraduationCap className="w-5 h-5" />
-                Rekrutacja
-              </Link>
-              <Link
-                href="/kontakt"
-                className="flex items-center gap-3 text-foreground hover:text-primary transition-colors font-semibold py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Mail className="w-5 h-5" />
-                Kontakt
-              </Link>
+                Szkoła
+                <ChevronDown className={`w-4 h-4 transition-transform ${schoolMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+              {schoolMenuOpen && (
+                <div className="ml-4 mt-2 space-y-1">
+                  {menuStructure.school.map((item) => (
+                    <Link
+                      key={item.slug}
+                      href={item.slug}
+                      className="block py-2 text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
+
+            <div>
+              <button
+                onClick={() => setStudentMenuOpen(!studentMenuOpen)}
+                className="flex items-center justify-between w-full py-2 font-semibold"
+              >
+                Dla ucznia
+                <ChevronDown className={`w-4 h-4 transition-transform ${studentMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+              {studentMenuOpen && (
+                <div className="ml-4 mt-2 space-y-1">
+                  {menuStructure.student.map((item) => (
+                    <Link
+                      key={item.slug}
+                      href={item.slug}
+                      className="block py-2 text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href="/aktualnosci" className="block py-2 font-semibold" onClick={() => setMobileMenuOpen(false)}>
+              Aktualności
+            </Link>
+            <Link href="/galeria" className="block py-2 font-semibold" onClick={() => setMobileMenuOpen(false)}>
+              Galeria
+            </Link>
+
+            <div>
+              <button
+                onClick={() => setYearMenuOpen(!yearMenuOpen)}
+                className="flex items-center justify-between w-full py-2 font-semibold"
+              >
+                Rok szkolny
+                <ChevronDown className={`w-4 h-4 transition-transform ${yearMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+              {yearMenuOpen && (
+                <div className="ml-4 mt-2 space-y-1">
+                  {menuStructure.calendar.map((item) => (
+                    <Link
+                      key={item.slug}
+                      href={item.slug}
+                      className="block py-2 text-sm"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link href="/kontakt" className="block py-2 font-semibold" onClick={() => setMobileMenuOpen(false)}>
+              Kontakt
+            </Link>
           </div>
         )}
       </div>

@@ -1,13 +1,13 @@
 {
-  "siteName": "EduCMS Szablon",
-  "shortName": "EduCMS",
-  "description": "Uniwersalny system CMS dla placówek edukacyjnych (przedszkola, szkoły podstawowe, średnie).",
+  "siteName": "Katolicka Szkoła Podstawowa im. Świętej Rodziny w Gdyni",
+  "shortName": "KSP Nazaret",
+  "description": "Katolicka Szkoła Podstawowa prowadzona przez Zgromadzenie Sióstr Świętej Rodziny z Nazaretu w Gdyni. Kształcenie w duchu wartości chrześcijańskich.",
   "contact": {
-    "phone": "123 456 789",
-    "email": "kontakt@educms-szablon.pl",
-    "directorEmail": "dyrektor@educms-szablon.pl",
-    "accountingEmail": "ksiegowosc@educms-szablon.pl",
-    "address": "ul. Edukacyjna 1, 00-000 Miasto",
+    "phone": "58 660 64 64",
+    "email": "sekretariat@kspgdynia.pl",
+    "directorEmail": "dyrektor@kspgdynia.pl",
+    "accountingEmail": "ksiegowosc@kspgdynia.pl",
+    "address": "ul. Tetmajera 65a, 81-421 Gdynia",
     "mapUrl": "https://maps.app.goo.gl/"
   },
   "social": {
@@ -15,15 +15,15 @@
   },
   "theme": {
     "colors": {
-      "primary": "#2f67ab",
-      "secondary": "#6fc0e8",
-      "accent": "#f2c91f",
-      "text": "#443b32",
-      "background": "#fcfaf8"
+      "primary": "#2563eb",
+      "secondary": "#60a5fa",
+      "accent": "#f59e0b",
+      "text": "#1e293b",
+      "background": "#ffffff"
     }
   },
   "logos": {
-    "main": "/logo.jpg",
-    "footer": "/logo.jpg"
+    "main": "/logo-6.png",
+    "footer": "/logo-6.png"
   }
 }
